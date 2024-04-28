@@ -5,7 +5,7 @@ export class BasePage {
     click(locator) {
         cy.get(locator)
             .click()
-            return this
+        return this
     }
 
     type(locator, text) {
@@ -13,7 +13,7 @@ export class BasePage {
             .clear()
             .type(text)
             .should('have.value', text)
-            return this
+        return this
     }
 
     selectOptionFromDropDown(dropDownLocator, option) {
@@ -30,6 +30,11 @@ export class BasePage {
     verifyPageTitle(title) {
         cy.title().should('eq', title)
         return this
+    }
+
+    verifyTableData(tableRow, text) {
+        cy.contains('tr', tableRow)
+            .should('contain.text', text);
     }
 
     verifyTextInElement(locator, text) {

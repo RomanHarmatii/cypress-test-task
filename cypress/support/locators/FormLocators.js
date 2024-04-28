@@ -6,8 +6,8 @@ export default {
     GENDER_FEMALE_CHECK: '#genderFemale',
 
     READING_CHECKBOX: '[value="Reading"]',
-    SPORTS_CHECHKBOX:'[value="Sports"]',
-    MUSIC_CHECKBOX:'[value="Music"]',
+    SPORTS_CHECHKBOX: '[value="Sports"]',
+    MUSIC_CHECKBOX: '[value="Music"]',
 
     TIME_DROPDOWN: '#time',
 

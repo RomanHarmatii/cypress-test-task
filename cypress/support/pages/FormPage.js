@@ -4,7 +4,16 @@ import { DataGeneration } from "../utilities/DataGeneration";
 
 const dataGeneration = new DataGeneration()
 
-export class Form extends BasePage {
+export class FormPage extends BasePage {
+    constructor() {
+        super()
+        this.username = null
+        this.password = null
+        this.gender = null
+        this.hasHobbies = null
+        this.hobbies = null
+        this.time = null
+    }
 
     getRandomGender() {
         let gender = dataGeneration.getRandomBool() ? 'Male' : 'Female'
@@ -36,34 +45,35 @@ export class Form extends BasePage {
     }
 
     typeUsernameField(username) {
-        let finaleUsername = username ? username : dataGeneration.getRandomUsername()
-        super.type(formLocators.USERNAME_FIELD, finaleUsername)
+        this.username = username ? username : dataGeneration.getRandomUsername()
+        super.type(formLocators.USERNAME_FIELD, this.username)
         return this
     }
 
     typePasswordField(password) {
-        let finalePassword = password ? password : dataGeneration.getRandomPassword()
-        super.type(formLocators.PASSWORD_FIELD, finalePassword)
+        this.password = password ? password : dataGeneration.getRandomPassword()
+        super.type(formLocators.PASSWORD_FIELD, this.password)
         return this
     }
 
     selectGender(gender) {
-        let finaleGender = new String(gender ? gender : this.getRandomGender()).toLowerCase()
-        
-        if (finaleGender === 'male') {
+        this.gender = new String(gender ? gender : this.getRandomGender())
+
+        if (this.gender.toLowerCase() === 'male') {
             super.click(formLocators.GENDER_MALE_CHECK)
         } else {
             super.click(formLocators.GENDER_FEMALE_CHECK)
         }
+
         return this
     }
 
     selectHobbies(hasHobbies, hobbies) {
-        let finaleHasHobbies = hasHobbies ? hasHobbies : dataGeneration.getRandomBool()
-        let finaleHobbies = hobbies ? hobbies : this.getRandomHobbies()
+        this.hasHobbies = hasHobbies ? hasHobbies : dataGeneration.getRandomBool()
+        this.hobbies = hobbies ? hobbies : this.getRandomHobbies()
 
-        if (finaleHasHobbies) {
-            finaleHobbies.forEach((value) => {
+        if (this.hasHobbies) {
+            this.hobbies.forEach((value) => {
                 switch (value.toString().toLowerCase()) {
                     case 'reading':
                         super.click(formLocators.READING_CHECKBOX)
@@ -82,21 +92,22 @@ export class Form extends BasePage {
     }
 
     selectTimeOption(time) {
-        const finaleTime = time ? time : this.getRandomTime()
+        this.time = time ? time : this.getRandomTime()
+        let option = ''
 
-        switch (finaleTime.toString().toLowerCase()) {
+        switch (this.time.toString().toLowerCase()) {
             case 'noon':
-                super.selectOptionFromDropDown(formLocators.TIME_DROPDOWN, 'Noon')
+                option = 'Noon'
                 break
             case 'morning':
-                super.selectOptionFromDropDown(formLocators.TIME_DROPDOWN, 'Morning')
+                option = 'Morning'
                 break
             case 'evening':
-                super.selectOptionFromDropDown(formLocators.TIME_DROPDOWN, 'Evening')
+                option = 'Evening'
                 break
-
         }
 
+        super.selectOptionFromDropDown(formLocators.TIME_DROPDOWN, option)
         return this
     }
 
@@ -125,4 +136,4 @@ export class Form extends BasePage {
         return this
     }
 
-} export default Form;
+}
