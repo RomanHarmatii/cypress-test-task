@@ -42,10 +42,10 @@ describe('Tests for form page', () => {
       .verifyLoadingWasFinnished()
       .verifyPageTitle('Results')
 
-    resultPage.verifyGreetingTitle(formPage.username)
-      .verifyGender(formPage.gender)
-      .verifyHobbies(formPage.hasHobbies, formPage.hobbies)
-      .verifyTime(formPage.time)
+    resultPage.verifyGreetingTitle(formPage.getUsername())
+      .verifyGender(formPage.getGender())
+      .verifyHobbies(formPage.getHasHobbies(), formPage.getHobbies)
+      .verifyTime(formPage.getTime())
   })
 
 })

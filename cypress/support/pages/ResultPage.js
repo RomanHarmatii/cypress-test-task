@@ -13,7 +13,7 @@ export class ResultPage extends BasePage {
     }
 
     verifyHobbies(hasHobbies, hobbies) {
-        if (hasHobbies) {
+        if (hasHobbies && hobbies) {
             hobbies.forEach((value) => {
                 super.verifyTableData('Hobbies', value)
             })

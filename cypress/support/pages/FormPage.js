@@ -8,11 +8,30 @@ export class FormPage extends BasePage {
     constructor() {
         super()
         this.username = null
-        this.password = null
         this.gender = null
         this.hasHobbies = null
         this.hobbies = null
         this.time = null
+    }
+
+    getUsername() {
+        return this.username
+    }
+
+    getGender() {
+        return this.gender
+    }
+
+    getHasHobbies() {
+        return this.hasHobbies
+    }
+
+    getHobbies() {
+        return this.hobbies
+    }
+
+    getTime() {
+        return this.time
     }
 
     getRandomGender() {
@@ -46,20 +65,20 @@ export class FormPage extends BasePage {
 
     typeUsernameField(username) {
         this.username = username ? username : dataGeneration.getRandomUsername()
-        super.type(formLocators.USERNAME_FIELD, this.username)
+        super.type(formLocators.USERNAME_FIELD, this.getUsername())
         return this
     }
 
     typePasswordField(password) {
-        this.password = password ? password : dataGeneration.getRandomPassword()
-        super.type(formLocators.PASSWORD_FIELD, this.password)
+        let finalePassword = password ? password : dataGeneration.getRandomPassword()
+        super.type(formLocators.PASSWORD_FIELD, finalePassword)
         return this
     }
 
     selectGender(gender) {
         this.gender = new String(gender ? gender : this.getRandomGender())
 
-        if (this.gender.toLowerCase() === 'male') {
+        if (this.getGender().toLowerCase() === 'male') {
             super.click(formLocators.GENDER_MALE_CHECK)
         } else {
             super.click(formLocators.GENDER_FEMALE_CHECK)
@@ -72,8 +91,8 @@ export class FormPage extends BasePage {
         this.hasHobbies = hasHobbies ? hasHobbies : dataGeneration.getRandomBool()
         this.hobbies = hobbies ? hobbies : this.getRandomHobbies()
 
-        if (this.hasHobbies) {
-            this.hobbies.forEach((value) => {
+        if (this.getHasHobbies()) {
+            this.getHobbies().forEach((value) => {
                 switch (value.toString().toLowerCase()) {
                     case 'reading':
                         super.click(formLocators.READING_CHECKBOX)
@@ -95,7 +114,7 @@ export class FormPage extends BasePage {
         this.time = time ? time : this.getRandomTime()
         let option = ''
 
-        switch (this.time.toString().toLowerCase()) {
+        switch (this.getTime().toString().toLowerCase()) {
             case 'noon':
                 option = 'Noon'
                 break
